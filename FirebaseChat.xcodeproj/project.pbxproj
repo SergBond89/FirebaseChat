@@ -20,6 +20,10 @@
 		A55DC32D23436B7C00ECE76C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A55DC32B23436B7C00ECE76C /* Main.storyboard */; };
 		A55DC32F23436B7F00ECE76C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A55DC32E23436B7F00ECE76C /* Assets.xcassets */; };
 		A55DC33223436B7F00ECE76C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A55DC33023436B7F00ECE76C /* LaunchScreen.storyboard */; };
+		A57114642353572C0012ACA9 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57114632353572C0012ACA9 /* UIImageViewExtension.swift */; };
+		A5ACC3DE234DDF5C00C4B420 /* NewMessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACC3DD234DDF5C00C4B420 /* NewMessageTableViewController.swift */; };
+		A5ACC3E0234DE40500C4B420 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACC3DF234DE40500C4B420 /* User.swift */; };
+		A5ACC3E2234DE49700C4B420 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACC3E1234DE49700C4B420 /* UserTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +43,10 @@
 		A55DC32E23436B7F00ECE76C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A55DC33123436B7F00ECE76C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A55DC33323436B7F00ECE76C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A57114632353572C0012ACA9 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		A5ACC3DD234DDF5C00C4B420 /* NewMessageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageTableViewController.swift; sourceTree = "<group>"; };
+		A5ACC3DF234DE40500C4B420 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A5ACC3E1234DE49700C4B420 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		FE06B508E97F728931450D36 /* Pods-FirebaseChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseChat.debug.xcconfig"; path = "Target Support Files/Pods-FirebaseChat/Pods-FirebaseChat.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +86,7 @@
 				A514865C23462E64009E08A1 /* RegisterViewController.swift */,
 				A514865A23462E4D009E08A1 /* LoginViewController.swift */,
 				A516E0B1234B4F0200555A53 /* MessagesTableTableViewController.swift */,
+				A5ACC3DD234DDF5C00C4B420 /* NewMessageTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -85,6 +94,7 @@
 		A5148658234627DC009E08A1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A5ACC3E1234DE49700C4B420 /* UserTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -92,6 +102,7 @@
 		A5148659234627E7009E08A1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A5ACC3DF234DE40500C4B420 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -101,6 +112,7 @@
 			children = (
 				A5148663234634C9009E08A1 /* Utilities.swift */,
 				A514866523463EB2009E08A1 /* UIVIewExtension.swift */,
+				A57114632353572C0012ACA9 /* UIImageViewExtension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -258,12 +270,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				A516E0B2234B4F0200555A53 /* MessagesTableTableViewController.swift in Sources */,
+				A5ACC3DE234DDF5C00C4B420 /* NewMessageTableViewController.swift in Sources */,
+				A57114642353572C0012ACA9 /* UIImageViewExtension.swift in Sources */,
+				A5ACC3E2234DE49700C4B420 /* UserTableViewCell.swift in Sources */,
 				A514865B23462E4D009E08A1 /* LoginViewController.swift in Sources */,
 				A5148664234634C9009E08A1 /* Utilities.swift in Sources */,
 				A514865D23462E64009E08A1 /* RegisterViewController.swift in Sources */,
 				A55DC32623436B7C00ECE76C /* AppDelegate.swift in Sources */,
 				A55DC32823436B7C00ECE76C /* SceneDelegate.swift in Sources */,
 				A514866623463EB2009E08A1 /* UIVIewExtension.swift in Sources */,
+				A5ACC3E0234DE40500C4B420 /* User.swift in Sources */,
 				A5148662234632AE009E08A1 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

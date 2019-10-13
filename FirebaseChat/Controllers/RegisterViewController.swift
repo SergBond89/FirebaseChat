@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseStorage
 
 class RegisterViewController: UIViewController {
     
@@ -20,8 +21,17 @@ class RegisterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        avatarImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectAvatarImage)))
+        avatarImage.isUserInteractionEnabled = true
         setupElements()
         view.dismissKeyboard()
+    }
+    
+    @objc func handleSelectAvatarImage() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        present(picker, animated: true, completion: nil)
     }
     
     private func setupElements() {
@@ -79,23 +89,70 @@ class RegisterViewController: UIViewController {
                 else {
                     
                     guard let uid = result?.user.uid else { return }
+                    let imageName = UUID().uuidString
                     
-                    let ref = Database.database().reference(fromURL: "https://fir-chat-fc84f.firebaseio.com/")
-                    
-                    let userReference = ref.child("users").child(uid)
-                    
-                    let values = ["name": name, "email": email]
-                    
-                    userReference.updateChildValues(values) { (error, ref) in
-                        
-                        if error != nil {
-                            self.showError("Error saving user data")
+                    if let avatarImage = self.avatarImage.image, let uploadData = avatarImage.pngData() {
+                        let storageRef = Storage.storage().reference().child("avatar_images").child("\(imageName).png")
+                        storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
+                            if error != nil {
+                                print(error ?? "")
+                                return
+                            }
+                            storageRef.downloadURL { (url, error) in
+                                if error != nil {
+                                    print(error!.localizedDescription)
+                                    return
+                                }
+                                if let avatarImageUrl = url?.absoluteString {
+                                    let values = ["name": name, "email": email, "avatarImageUrl": avatarImageUrl]
+                                    self.registerUserIntoDatabaseWithUID(uid, values: values as [String : AnyObject])
+                                }
+                            }
                         }
-                        
                     }
-                    self.navigationController?.popToRootViewController(animated: true)
                 }
             }
         }
     }
+    private func registerUserIntoDatabaseWithUID(_ uid: String, values: [String: AnyObject]) {
+        
+        let ref = Database.database().reference(fromURL: "https://fir-chat-fc84f.firebaseio.com/")
+        
+        let userReference = ref.child("users").child(uid)
+        
+        userReference.updateChildValues(values) { (error, ref) in
+            
+            if error != nil {
+                self.showError("Error saving user data")
+            }
+            
+        }
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+}
+
+extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        var selectedImageFromPicker: UIImage?
+        
+        if let editedImage = info[.editedImage] as? UIImage {
+            selectedImageFromPicker = editedImage
+        } else if let originalImage = info[.originalImage ] as? UIImage {
+            selectedImageFromPicker = originalImage
+        }
+        
+        if let selectedImage = selectedImageFromPicker {
+            avatarImage.image = selectedImage
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
 }
