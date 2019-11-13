@@ -15,11 +15,13 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
+        loginButton.isEnabled = true
         setupElements()
         view.dismissKeyboard()
+        emailTextField.becomeFirstResponder()
     }
     
     
@@ -59,13 +61,15 @@ class LoginViewController: UIViewController {
             
             let email = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            
+                        
             Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
                 
                 if error != nil {
                     self.showError(error!.localizedDescription)
                 } else {
-                    self.navigationController?.popToRootViewController(animated: true)
+                    self.loginButton.isEnabled = false
+                    let messagesTVC = self.storyboard?.instantiateViewController(withIdentifier: "MessagesTVC") as! MessagesTableViewController
+                    UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController = UINavigationController(rootViewController: messagesTVC)
                 }
                 
             }

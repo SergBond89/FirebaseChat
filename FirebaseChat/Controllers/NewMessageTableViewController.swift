@@ -12,6 +12,7 @@ import Firebase
 class NewMessageTableViewController: UITableViewController {
     
     var users = [User]()
+    var messagesTVC: MessagesTableViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,14 +21,16 @@ class NewMessageTableViewController: UITableViewController {
     }
     
     @objc func handleCancel() {
-        dismiss(animated: true, completion: nil)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     func fetchUser() {
         Database.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 let user = User(dictionary: dictionary)
+                user.id = snapshot.key
                 self.users.append(user)
+                
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -49,13 +52,19 @@ class NewMessageTableViewController: UITableViewController {
         let user = self.users[indexPath.row]
         
         cell.nameLabel.text = user.name
-        cell.emailLabel.text = user.email
+        cell.detailInfoLabel.text = user.email
         
         if let avatarImageUrl = user.avatarImageUrl {
             cell.avatarImage.loadImageUsingCasheWithUrlString(avatarImageUrl)
         }
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.navigationController?.popToRootViewController(animated: true)
+        let user = self.users[indexPath.row]
+        self.messagesTVC?.showChatViewControllerForUser(user)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

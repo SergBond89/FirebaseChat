@@ -18,9 +18,10 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
+        registerButton.isEnabled = true
         avatarImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectAvatarImage)))
         avatarImage.isUserInteractionEnabled = true
         setupElements()
@@ -80,7 +81,8 @@ class RegisterViewController: UIViewController {
             let name = nameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let email = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            
+            self.registerButton.isEnabled = false
+
             Auth.auth().createUser(withEmail: email, password: password) { (result: AuthDataResult?, error) in
                 
                 if error != nil {
@@ -89,10 +91,11 @@ class RegisterViewController: UIViewController {
                 else {
                     
                     guard let uid = result?.user.uid else { return }
+                    
                     let imageName = UUID().uuidString
                     
-                    if let avatarImage = self.avatarImage.image, let uploadData = avatarImage.pngData() {
-                        let storageRef = Storage.storage().reference().child("avatar_images").child("\(imageName).png")
+                    if let avatarImage = self.avatarImage.image, let uploadData = avatarImage.jpegData(compressionQuality: 0.1) {
+                        let storageRef = Storage.storage().reference().child("avatar_images").child("\(imageName).jpg")
                         storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
                             if error != nil {
                                 print(error ?? "")
@@ -127,7 +130,8 @@ class RegisterViewController: UIViewController {
             }
             
         }
-        self.navigationController?.popToRootViewController(animated: true)
+        let messagesTVC = self.storyboard?.instantiateViewController(withIdentifier: "MessagesTVC") as! MessagesTableViewController
+        UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController = UINavigationController(rootViewController: messagesTVC)
     }
 }
 
