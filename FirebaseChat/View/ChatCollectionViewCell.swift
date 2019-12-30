@@ -11,7 +11,8 @@ import UIKit
 class ChatCollectionViewCell: UICollectionViewCell {
     
     let textView: UITextView = {
-       let tv = UITextView()
+        let tv = UITextView()
+        tv.isEditable = false
         tv.font = UIFont.systemFont(ofSize: 16)
         tv.textColor = .white
         tv.backgroundColor = .clear
@@ -22,7 +23,7 @@ class ChatCollectionViewCell: UICollectionViewCell {
     static let blueColor = UIColor(r: 0, g: 137, b: 249)
     
     let bubbleView: UIView = {
-       let view = UIView()
+        let view = UIView()
         view.backgroundColor = blueColor
         view.layer.cornerRadius = 16
         view.layer.masksToBounds = true
@@ -40,9 +41,22 @@ class ChatCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
+    lazy var messageImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = 16
+        imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     var bubbleViewWidthAnchor: NSLayoutConstraint?
     var bubbleViewRightAnchor: NSLayoutConstraint?
     var bubbleViewLeftAnchor: NSLayoutConstraint?
+    
+    override func prepareForReuse() {
+        messageImageView.image = nil
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -50,6 +64,14 @@ class ChatCollectionViewCell: UICollectionViewCell {
         addSubview(bubbleView)
         addSubview(textView)
         addSubview(avatarImageView)
+        
+        bubbleView.addSubview(messageImageView)
+        
+        messageImageView.leftAnchor.constraint(equalTo: bubbleView.leftAnchor).isActive = true
+        messageImageView.topAnchor.constraint(equalTo: bubbleView.topAnchor).isActive = true
+        messageImageView.widthAnchor.constraint(equalTo: bubbleView.widthAnchor).isActive = true
+        messageImageView.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor).isActive = true
+//        messageImageView.heightAnchor.constraint(equalTo: bubbleView.heightAnchor).isActive = true
         
         avatarImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8).isActive = true
         avatarImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true

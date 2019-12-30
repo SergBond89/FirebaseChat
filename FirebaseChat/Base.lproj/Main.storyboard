@@ -76,7 +76,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8xi-kO-mrD">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GM8-IW-57y">
                                         <rect key="frame" x="0.0" y="70" width="334" height="50"/>
@@ -124,7 +124,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pyH-Hh-6gE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4492.753623188406" y="504.91071428571428"/>
+            <point key="canvasLocation" x="4499" y="500"/>
         </scene>
         <!--Messages Table View Controller-->
         <scene sceneID="6Y1-AG-NkI">
@@ -221,7 +221,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1JO-ka-cF3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5568" y="159"/>
+            <point key="canvasLocation" x="5283" y="159"/>
         </scene>
         <!--New Message Table View Controller-->
         <scene sceneID="4dP-5Q-E8d">
@@ -291,7 +291,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hCK-61-Ogd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6299" y="159"/>
+            <point key="canvasLocation" x="5986" y="159"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="miO-sY-Kp6">
@@ -319,7 +319,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VUw-4s-W33">
                                         <rect key="frame" x="0.0" y="70" width="334" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qpi-47-5od">
                                         <rect key="frame" x="0.0" y="140" width="334" height="50"/>
@@ -420,26 +420,35 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="Send"/>
                                         <connections>
-                                            <action selector="sendMessageTupped:" destination="NzS-Yd-WdL" eventType="touchUpInside" id="wZo-GL-oEs"/>
+                                            <action selector="sendMessageTapped:" destination="NzS-Yd-WdL" eventType="touchUpInside" id="2Ru-u5-FgY"/>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter message..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F8n-0n-dKF">
-                                        <rect key="frame" x="8" y="2" width="326" height="46"/>
+                                        <rect key="frame" x="52" y="2" width="282" height="46"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadImageIcon" translatesAutoresizingMaskIntoConstraints="NO" id="6hL-On-PGI">
+                                        <rect key="frame" x="0.0" y="3" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="8ab-bW-dJG"/>
+                                            <constraint firstAttribute="height" constant="44" id="Edx-ia-3I4"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstItem="F8n-0n-dKF" firstAttribute="leading" secondItem="Wfj-ey-58t" secondAttribute="leading" constant="8" id="3la-Oo-WDv"/>
                                     <constraint firstAttribute="height" constant="50" id="3na-mo-OcB"/>
                                     <constraint firstAttribute="bottom" secondItem="F8n-0n-dKF" secondAttribute="bottom" constant="2" id="73G-pA-E2v"/>
+                                    <constraint firstItem="F8n-0n-dKF" firstAttribute="leading" secondItem="6hL-On-PGI" secondAttribute="trailing" constant="8" id="8OV-uv-c04"/>
                                     <constraint firstItem="F8n-0n-dKF" firstAttribute="centerY" secondItem="Wfj-ey-58t" secondAttribute="centerY" id="93C-0t-K3o"/>
                                     <constraint firstAttribute="trailing" secondItem="JC7-xh-Jnw" secondAttribute="trailing" id="E9f-k9-Hjq"/>
                                     <constraint firstItem="JC7-xh-Jnw" firstAttribute="height" secondItem="Wfj-ey-58t" secondAttribute="height" id="L2K-Hq-YFU"/>
                                     <constraint firstItem="JC7-xh-Jnw" firstAttribute="centerY" secondItem="Wfj-ey-58t" secondAttribute="centerY" id="LYW-eu-KRh"/>
                                     <constraint firstItem="F8n-0n-dKF" firstAttribute="top" secondItem="Wfj-ey-58t" secondAttribute="top" constant="2" id="OVk-SC-Mkg"/>
                                     <constraint firstItem="JC7-xh-Jnw" firstAttribute="leading" secondItem="F8n-0n-dKF" secondAttribute="trailing" id="S28-G5-ESa"/>
+                                    <constraint firstItem="6hL-On-PGI" firstAttribute="centerY" secondItem="Wfj-ey-58t" secondAttribute="centerY" id="o2k-Db-i9H"/>
+                                    <constraint firstItem="6hL-On-PGI" firstAttribute="leading" secondItem="Wfj-ey-58t" secondAttribute="leading" id="wMy-AU-AK7"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -459,17 +468,20 @@
                         <viewLayoutGuide key="safeArea" id="vGZ-gF-nmE"/>
                     </view>
                     <connections>
+                        <outlet property="bottomConstraint" destination="uBH-1C-PUL" id="FdZ-gW-co6"/>
                         <outlet property="collectionView" destination="h8u-bL-YUz" id="bP3-Uh-Zgs"/>
                         <outlet property="inputTextField" destination="F8n-0n-dKF" id="AHn-IF-i4k"/>
                         <outlet property="separatorView" destination="dlH-38-nlw" id="nzL-HO-jFv"/>
+                        <outlet property="uploadImageView" destination="6hL-On-PGI" id="Qac-C4-3tT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LPi-EM-IrP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7102.898550724638" y="158.70535714285714"/>
+            <point key="canvasLocation" x="6691" y="159"/>
         </scene>
     </scenes>
     <resources>
         <image name="avatarImage" width="80" height="80"/>
+        <image name="uploadImageIcon" width="50.5" height="50.5"/>
     </resources>
 </document>
